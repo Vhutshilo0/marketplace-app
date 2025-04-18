@@ -20,16 +20,24 @@ function PostItem() {
 
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!currentUser) return alert("You must be logged in.");
+
+    if (!currentUser) {
+      alert("You must be logged in to post.");
+      return;
+    }
+
+    if (!image) {
+      alert("Please select an image.");
+      return;
+    }
 
     setLoading(true);
+
     try {
-      // Upload image to Firebase Storage
       const imageRef = ref(storage, `items/${uuidv4()}`);
       await uploadBytes(imageRef, image);
       const imageUrl = await getDownloadURL(imageRef);
 
-      // Save item data to Firestore
       await addDoc(collection(db, 'listings'), {
         userId: currentUser.uid,
         title,
@@ -38,14 +46,16 @@ function PostItem() {
         description,
         condition,
         imageUrl,
-        createdAt: serverTimestamp(),
+        createdAt: serverTimestamp()
       });
 
       alert("Item posted successfully!");
       navigate('/');
     } catch (error) {
-      alert("Error posting item: " + error.message);
+      console.error("Error posting item:", error);
+      alert("Posting failed: " + error.message);
     }
+
     setLoading(false);
   };
 
@@ -53,9 +63,9 @@ function PostItem() {
     <div style={{ padding: '30px' }}>
       <h2>📦 Post an Item</h2>
       <form onSubmit={handleUpload}>
-        <input type="text" placeholder="Title" required onChange={(e) => setTitle(e.target.value)} /><br /><br />
+        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required /><br /><br />
 
-        <select onChange={(e) => setCategory(e.target.value)} value={category}>
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option>Accessories</option>
           <option>Vehicles</option>
           <option>Property</option>
@@ -66,17 +76,17 @@ function PostItem() {
           <option>Others</option>
         </select><br /><br />
 
-        <input type="number" placeholder="Price (R)" required onChange={(e) => setPrice(e.target.value)} /><br /><br />
-        <textarea placeholder="Description" required onChange={(e) => setDescription(e.target.value)} /><br /><br />
+        <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required /><br /><br />
+        <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required /><br /><br />
 
-        <select onChange={(e) => setCondition(e.target.value)} value={condition}>
+        <select value={condition} onChange={(e) => setCondition(e.target.value)}>
           <option>New</option>
           <option>Good</option>
           <option>Fair</option>
           <option>Used</option>
         </select><br /><br />
 
-        <input type="file" accept="image/*" required onChange={(e) => setImage(e.target.files[0])} /><br /><br />
+        <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required /><br /><br />
 
         <button type="submit" disabled={loading}>
           {loading ? 'Posting...' : 'Post Item'}
