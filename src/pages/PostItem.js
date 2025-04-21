@@ -60,11 +60,19 @@ function PostItem() {
   };
 
   return (
-    <div style={{ padding: '30px' }}>
+    <div className="container">
       <h2>📦 Post an Item</h2>
       <form onSubmit={handleUpload}>
-        <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required /><br /><br />
+        <label>Title</label>
+        <input
+          type="text"
+          placeholder="Item title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
 
+        <label>Category</label>
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option>Accessories</option>
           <option>Vehicles</option>
@@ -74,19 +82,40 @@ function PostItem() {
           <option>Furniture</option>
           <option>Books</option>
           <option>Others</option>
-        </select><br /><br />
+        </select>
 
-        <input type="number" placeholder="Price" value={price} onChange={(e) => setPrice(e.target.value)} required /><br /><br />
-        <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required /><br /><br />
+        <label>Price (R)</label>
+        <input
+          type="number"
+          placeholder="e.g. 1500"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          required
+        />
 
+        <label>Description</label>
+        <textarea
+          placeholder="Write a short description..."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+
+        <label>Condition</label>
         <select value={condition} onChange={(e) => setCondition(e.target.value)}>
           <option>New</option>
           <option>Good</option>
           <option>Fair</option>
           <option>Used</option>
-        </select><br /><br />
+        </select>
 
-        <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} required /><br /><br />
+        <label>Upload Image</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
+          required
+        />
 
         <button type="submit" disabled={loading}>
           {loading ? 'Posting...' : 'Post Item'}

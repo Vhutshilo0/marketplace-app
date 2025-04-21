@@ -19,15 +19,17 @@ function Home() {
   }, []);
 
   return (
-    <div style={{ padding: '30px' }}>
+    <div className="container">
       <h2>🛍️ Latest Listings</h2>
       {listings.length === 0 ? (
         <p>No items posted yet.</p>
       ) : (
         <div>
           {listings.map(item => (
-            <div key={item.id} style={{ marginBottom: '30px', borderBottom: '1px solid #ccc' }}>
-              <img src={item.imageUrl} alt={item.title} style={{ width: '250px', height: 'auto' }} />
+            <div className="item-card" key={item.id}>
+              {item.imageUrl && (
+                <img src={item.imageUrl} alt={item.title} />
+              )}
               <h3>{item.title}</h3>
               <p><strong>Price:</strong> R{item.price}</p>
               <p><strong>Condition:</strong> {item.condition}</p>

@@ -4,20 +4,18 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import PostItem from './pages/PostItem';
 import Home from './pages/Home';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
-      <div style={{ padding: 40 }}>
-        <h1 style={{ color: 'blue' }}>🔥 The App is finally Running!</h1>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/" element={<p>This is the home page.</p>} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/post" element={<PostItem />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/post" element={<PostItem />} />
+      </Routes>
     </Router>
   );
 }
