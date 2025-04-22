@@ -152,4 +152,33 @@ body {
       right: 0;
     }
   }
+  .profile-sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.3); /* overlay behind sidebar */
+    z-index: 1000;
+  }
+  
+  .profile-sidebar-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
   
