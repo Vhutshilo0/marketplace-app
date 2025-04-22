@@ -22,13 +22,11 @@ function Navbar() {
         padding: '0 20px',
         color: 'white'
       }}>
+        {/* Left side links */}
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
           <Link to="/" style={navLink}>Home</Link>
           {currentUser && (
-            <>
-              <Link to="/post" style={navLink}>Post Item</Link>
-              <Link to="/profile" style={navLink}>Profile</Link>
-            </>
+            <Link to="/post" style={navLink}>Post Item</Link>
           )}
 
           {/* Browse Dropdown */}
@@ -47,7 +45,13 @@ function Navbar() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '15px' }}>
+        {/* Right side (Login/Logout + Profile icon) */}
+        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          {currentUser && (
+            <Link to="/profile" style={{ ...navLink, fontSize: '20px' }} title="My Profile">
+              👤
+            </Link>
+          )}
           {currentUser ? (
             <button onClick={handleLogout} style={logoutButton}>
               Logout
@@ -67,7 +71,7 @@ function Navbar() {
 const navLink = {
   color: 'white',
   textDecoration: 'none',
-  fontWeight: '500'
+  fontWeight: '500',
 };
 
 const logoutButton = {
