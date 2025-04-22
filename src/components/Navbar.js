@@ -22,11 +22,29 @@ function Navbar() {
         padding: '0 20px',
         color: 'white'
       }}>
-        <div style={{ display: 'flex', gap: '15px' }}>
+        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
           <Link to="/" style={navLink}>Home</Link>
           {currentUser && (
-            <Link to="/post" style={navLink}>Post Item</Link>
+            <>
+              <Link to="/post" style={navLink}>Post Item</Link>
+              <Link to="/profile" style={navLink}>Profile</Link>
+            </>
           )}
+
+          {/* Browse Dropdown */}
+          <div className="dropdown">
+            <span style={{ ...navLink, cursor: 'pointer' }}>Browse</span>
+            <div className="dropdown-content">
+              <Link to="/category/accessories">Accessories</Link>
+              <Link to="/category/vehicles">Vehicles</Link>
+              <Link to="/category/property">Property</Link>
+              <Link to="/category/fashion">Fashion</Link>
+              <Link to="/category/electronics">Electronics</Link>
+              <Link to="/category/furniture">Furniture</Link>
+              <Link to="/category/books">Books</Link>
+              <Link to="/category/others">Others</Link>
+            </div>
+          </div>
         </div>
 
         <div style={{ display: 'flex', gap: '15px' }}>
@@ -63,4 +81,3 @@ const logoutButton = {
 };
 
 export default Navbar;
-
