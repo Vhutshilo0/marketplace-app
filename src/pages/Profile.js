@@ -12,19 +12,20 @@ function Profile() {
   };
 
   return (
-    <div className="container">
-      <h2>👤 My Profile</h2>
-
-      <div style={{ backgroundColor: '#f5f5f5', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
-        <p><strong>Email:</strong> {currentUser?.email}</p>
-        <p><strong>User ID:</strong> {currentUser?.uid}</p>
+    <div className="profile-layout">
+      <div className="profile-sidebar">
+        <h3>👤 {currentUser?.email}</h3>
+        <ul>
+          <li onClick={() => navigate('/edit-profile')}>✏️ Edit Profile</li>
+          <li onClick={() => navigate('/settings')}>⚙️ Settings</li>
+          <li onClick={() => navigate('/my-listings')}>📦 My Listings</li>
+          <li onClick={handleLogout} className="logout-link">🚪 Logout</li>
+        </ul>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <button onClick={() => navigate('/edit-profile')} className="btn-primary">✏️ Edit Profile</button>
-        <button onClick={() => navigate('/settings')} className="btn-primary">⚙️ Settings</button>
-        <button onClick={() => navigate('/my-listings')} className="btn-primary">📦 My Listings</button>
-        <button onClick={handleLogout} className="btn-danger">🚪 Logout</button>
+      <div className="profile-content">
+        <h2>Welcome back 👋</h2>
+        <p>Select an option from the sidebar.</p>
       </div>
     </div>
   );

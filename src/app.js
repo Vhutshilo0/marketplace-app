@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import PostItem from './pages/PostItem';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/post" element={<PostItem />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
