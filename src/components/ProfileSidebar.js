@@ -7,13 +7,13 @@ function ProfileSidebar({ onClose }) {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await logout();
+    logout();
     navigate('/login');
   };
 
   return (
-    <div className="profile-sidebar-overlay">
-      <div className="profile-sidebar-panel">
+    <div className="profile-sidebar-backdrop" onClick={onClose}>
+      <div className="profile-sidebar-panel" onClick={(e) => e.stopPropagation()}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3>👤 {currentUser?.email}</h3>
           <button onClick={onClose} style={{ fontSize: '20px', background: 'none', border: 'none', cursor: 'pointer' }}>✖️</button>
